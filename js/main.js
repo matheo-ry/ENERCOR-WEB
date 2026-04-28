@@ -118,15 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
+                this.vx = (Math.random() - 0.5) * 1.0;
+                this.vy = (Math.random() - 0.5) * 1.0;
                 this.radius = Math.random() * 2 + 1;
             }
 
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(200, 200, 200, 0.6)';
+                ctx.fillStyle = 'rgba(255, 90, 0, 0.8)';
                 ctx.fill();
             }
 
@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function initParticles() {
             particles = [];
-            let particleCount = (width * height) / 12000; // Densidad "Nivel 7"
-            if (particleCount > 110) particleCount = 110;
+            let particleCount = (width * height) / 6000; // Densidad "Nivel 7"
+            if (particleCount > 200) particleCount = 200;
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -175,11 +175,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     let dy = particles[i].y - particles[j].y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 140) { // Mayor radio para formas
+                    // --- INICIO: REPULSIÓN ENTRE PARTÍCULAS ---
+                    // Si se acercan a menos de 70px, se separan suavemente
+                    if (distance < 50 && distance > 0) {
+                        const repulsion = 0.4; // Ajusta este número si quieres que se empujen más o menos
+                        particles[i].x += (dx / distance) * repulsion;
+                        particles[i].y += (dy / distance) * repulsion;
+                        particles[j].x -= (dx / distance) * repulsion;
+                        particles[j].y -= (dy / distance) * repulsion;
+                    }
+                    // --- FIN: REPULSIÓN ---
+                    if (distance < 100) { // Mayor radio para formas
                         ctx.beginPath();
                         // Opacidad sutilmente aumentada (Nivel 7)
-                        const opacity = (1 - distance / 140) * 0.55;
-                        ctx.strokeStyle = `rgba(150, 150, 150, ${opacity})`;
+                        const opacity = (1 - distance / 100) * 0.55;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.8})`;
                         ctx.lineWidth = 1;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
