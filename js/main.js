@@ -87,13 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach(el => observer.observe(el));
 
-    // 3. Animación Canvas de Red Eléctrica (Hero)
+  // 3. Animación Canvas de Red Eléctrica (Hero)
     const canvas = document.getElementById('hero-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
         const mouse = { x: null, y: null, radius: 100 };
+        let animationId; // Variable para controlar la animación (Paso 3)
 
         function resizeParams() {
             width = canvas.width = window.innerWidth;
@@ -157,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function initParticles() {
             particles = [];
-            let particleCount = (width * height) / 6000; // Densidad "Nivel 7"
+            let particleCount = (width * height) / 6000; 
             if (particleCount > 200) particleCount = 200;
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
@@ -165,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function animateCanvas() {
-            requestAnimationFrame(animateCanvas);
+            animationId = requestAnimationFrame(animateCanvas);
             ctx.clearRect(0, 0, width, height);
 
             for (let i = 0; i < particles.length; i++) {
@@ -175,19 +176,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     let dy = particles[i].y - particles[j].y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
-                    // --- INICIO: REPULSIÓN ENTRE PARTÍCULAS ---
-                    // Si se acercan a menos de 70px, se separan suavemente
+                    // Repulsión entre partículas
                     if (distance < 50 && distance > 0) {
-                        const repulsion = 0.4; // Ajusta este número si quieres que se empujen más o menos
+                        const repulsion = 0.4; 
                         particles[i].x += (dx / distance) * repulsion;
                         particles[i].y += (dy / distance) * repulsion;
                         particles[j].x -= (dx / distance) * repulsion;
                         particles[j].y -= (dy / distance) * repulsion;
                     }
-                    // --- FIN: REPULSIÓN ---
-                    if (distance < 100) { // Mayor radio para formas
+                    
+                    // Líneas
+                    if (distance < 100) { 
                         ctx.beginPath();
-                        // Opacidad sutilmente aumentada (Nivel 7)
                         const opacity = (1 - distance / 100) * 0.55;
                         ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.8})`;
                         ctx.lineWidth = 1;
@@ -199,7 +199,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // --- OPTIMIZACIÓN DE BATERÍA (Paso 3) ---
+        const canvasObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!animationId) animateCanvas();
+                } else {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+            });
+        }, { threshold: 0 }); 
+        
+        canvasObserver.observe(document.querySelector('.hero'));
+
         initParticles();
-        animateCanvas();
+        
+        // --- ARREGLO DE REDIMENSIONAMIENTO (Paso 2) ---
+        window.addEventListener('resize', initParticles);
     }
 });
