@@ -815,25 +815,25 @@ ul {
     position: fixed;
     width: 64px;
     height: 64px;
-    bottom: 40px;
-    right: 40px;
+    bottom: 25px;
+    right: 25px;
     background-color: var(--color-accent);
     color: #FFF;
     border-radius: 50px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
     animation: pulse-whatsapp 2s infinite;
-    transition: all var(--transition-fast);
+    transition: all 0.3s ease;
 }
 
 .whatsapp-float:hover {
     transform: scale(1.1);
     animation: none;
-    /* Frenamos el pulso para facilitar el clic */
-    background-color: #E04D00;
+    background-color: #FF6A1A;
+    box-shadow: 0 6px 20px rgba(255, 90, 0, 0.55);
 }
 
 .whatsapp-float svg {
