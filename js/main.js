@@ -5,28 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const dashContents = document.querySelectorAll('.dash-content');
 
     function switchTab(targetId) {
-        // Desactiva todos
+        // Desactiva todos los botones y contenidos
         dashBtns.forEach(b => b.classList.remove('active'));
-        dashContents.forEach(c => {
-            c.classList.remove('active');
-            setTimeout(() => {
-                if (!c.classList.contains('active')) {
-                    c.style.display = 'none';
-                }
-            }, 500); // match CSS transition
-        });
+        dashContents.forEach(c => c.classList.remove('active'));
 
-        // Activa el correcto
+        // Activa el botón y contenido seleccionado
         const targetBtn = document.querySelector(`.dash-btn[data-target="${targetId}"]`);
         const targetContent = document.getElementById(targetId);
 
         if (targetBtn && targetContent) {
             targetBtn.classList.add('active');
-            targetContent.style.display = 'block';
-            // Pequeño retardo para dar tiempo a display:block antes de subir opacidad
-            setTimeout(() => {
-                targetContent.classList.add('active');
-            }, 50);
+            targetContent.classList.add('active');
         }
     }
 
