@@ -208,3 +208,26 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', initParticles);
     }
 });
+// =========================================
+// Pestañas del Cajón FAQ
+// =========================================
+const faqTabBtns = document.querySelectorAll('.faq-tab-btn');
+const faqTabPanes = document.querySelectorAll('.faq-tab-pane');
+
+faqTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // 1. Quitar la clase 'active' de todos los botones y paneles
+        faqTabBtns.forEach(b => b.classList.remove('active'));
+        faqTabPanes.forEach(p => p.classList.remove('active'));
+
+        // 2. Añadir la clase 'active' al botón clicado
+        btn.classList.add('active');
+
+        // 3. Mostrar el panel correspondiente
+        const targetId = btn.getAttribute('data-faq-target');
+        const targetPane = document.getElementById(targetId);
+        if (targetPane) {
+            targetPane.classList.add('active');
+        }
+    });
+});

@@ -714,52 +714,59 @@ ul {
 }
 
 /* =========================================
-   9. FOOTER
-   ========================================= */
-.site-footer {
-    background-color: var(--color-footer);
-    /* Negro absoluto */
-    color: var(--color-text-muted);
+   FOOTER
+========================================= */
+footer {
     padding: 60px 0 40px 0;
-    text-align: center;
+    background-color: #000000;
+    border-top: 1px solid #1a1a1a;
+    text-align: center; /* Centra todos los textos por defecto */
 }
 
-.footer-container {
+.footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    align-items: center; /* Fuerza a que todo (incluido el logo) vaya al centro */
+    gap: 20px;
 }
 
 .footer-logo {
-    height: 40px;
-    width: auto;
-    opacity: 0.8;
-    /* Suavidad en el pie */
+    height: 45px;
+    margin-bottom: 10px;
 }
 
-.footer-brand p {
-    margin-top: 16px;
+.footer-content p {
+    color: var(--color-text-muted);
     font-size: 0.9rem;
-    color: rgba(229, 231, 235, 0.6);
+    margin: 0;
 }
 
+/* El bloque de enlaces ahora parece un menú cuidado */
 .footer-links {
     display: flex;
-    gap: 24px;
-    margin-top: 10px;
+    gap: 20px;
+    margin-top: 15px;
 }
 
 .footer-links a {
-    color: var(--color-text-main);
-    font-weight: 500;
-    transition: color var(--transition-fast);
+    color: #888;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
+/* Efecto al pasar el ratón: se ilumina en tu naranja */
 .footer-links a:hover {
-    color: var(--color-accent);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-color: rgba(255, 102, 0, 0.05);
 }
-
 /* Adaptación Móvil */
 @media (max-width: 768px) {
     .main-nav .nav-links {
@@ -878,4 +885,180 @@ ul {
 .show {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* =========================================
+   CAJÓN DESPLEGABLE SEO (VISUAL Y AVANZADO)
+========================================= */
+.seo-drawer-container {
+    margin: 40px auto 60px auto;
+    max-width: 1100px; /* Un poco más ancho para respirar mejor */
+    padding: 0 20px;
+}
+
+.seo-drawer {
+    background-color: #050505; /* Fondo más puro */
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.seo-drawer-btn {
+    padding: 18px 25px;
+    background: linear-gradient(90deg, #0a0a0a 0%, #111111 100%);
+    color: #e0e0e0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.seo-drawer-btn::-webkit-details-marker {
+    display: none;
+}
+
+.seo-drawer-btn:hover {
+    color: var(--color-primary);
+}
+
+.drawer-icon {
+    font-size: 1.8rem;
+    font-weight: 300;
+    transition: transform 0.4s ease;
+}
+
+.seo-drawer[open] .seo-drawer-btn {
+    border-bottom: 1px solid #222;
+    color: var(--color-primary);
+}
+
+.seo-drawer[open] .drawer-icon {
+    transform: rotate(45deg);
+}
+
+.seo-drawer-content {
+    padding: 40px 30px;
+}
+
+/* Espaciado general de la rejilla */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 40px; /* Mucho más espacio entre columnas */
+}
+
+/* Diseño de las Tarjetas (Más limpias, fondo más oscuro, bordes sutiles) */
+.faq-card {
+    background-color: #0a0a0a; /* Fondo casi negro puro */
+    border: 1px solid #1f1f1f; /* Borde gris muy suave */
+    border-radius: 12px; /* Esquinas más suaves */
+    padding: 30px 25px; /* Más aire por dentro (cero amontonado) */
+    margin-bottom: 25px; /* Más separación entre tarjeta y tarjeta */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff6600; /* Se ilumina en naranja al pasar el ratón */
+    box-shadow: 0 10px 25px rgba(255, 102, 0, 0.08); /* Brillo sutil */
+}
+
+.faq-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px; /* Más separación del título al texto */
+}
+
+/* Iconos exclusivamente en naranja */
+.faq-icon-small {
+    width: 24px;
+    height: 24px;
+    color: #ff6600; 
+    flex-shrink: 0;
+}
+
+.faq-card-header h5 {
+    color: #f5f5f5;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Etiquetas (Badges) monocromáticas con toque naranja */
+.seo-badge {
+    display: inline-block;
+    background-color: rgba(255, 102, 0, 0.1); 
+    color: #ff6600; /* Texto naranja en lugar de azul */
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 102, 0, 0.2);
+}
+
+/* Texto de párrafo más suave a la vista */
+.faq-card p {
+    color: #999999; /* Gris más claro para que no pelee con el blanco */
+    font-size: 0.9rem;
+    line-height: 1.7; /* Mayor interlineado para lectura fácil */
+    margin: 0;
+}
+/* =========================================
+   SISTEMA DE PESTAÑAS (FAQ DRAWER)
+========================================= */
+.faq-tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #1f1f1f;
+    padding-bottom: 10px;
+}
+
+.faq-tab-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.faq-tab-btn:hover {
+    color: #fff;
+}
+
+.faq-tab-btn.active {
+    color: var(--color-primary); /* Naranja */
+    border-bottom: 2px solid var(--color-primary);
+}
+
+/* Ocultar y mostrar paneles con una animación suave */
+.faq-tab-pane {
+    display: none;
+    animation: fadeInTab 0.4s ease-in-out;
+}
+
+.faq-tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
