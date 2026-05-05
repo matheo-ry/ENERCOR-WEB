@@ -2,32 +2,16 @@
    1. VARIABLES DE ESTADO Y COLORES CORPORATIVOS
    ========================================= */
 :root {
-    /* Cambiamos el azul por un tono oscuro o el mismo naranja para unificar */
-    --color-primary: #FF5A00; /* Ahora el 'Primary' es tu Naranja Enercor */
+    --color-primary: #FF5A00; 
     --color-accent: #FF5A00;
-
-    /* Escala de Grises - Premium Dark Mode */
     --color-bg-global: #101010;
-    /* Fondo general más elegante que el #1212 */
     --color-bg-header: #000000;
-    /* Negro elegante base para Cabecera sólida */
     --color-bg-section: #161616;
-    /* Gris oscuro profundo para capas alternativas */
     --color-bg-card: #1E1E1E;
-    /* Gris carbón ligero para tarjetas */
-
     --color-border: #3A3A3A;
-    /* Bordes sutiles */
-
     --color-text-main: #FFFFFF;
-    /* Textos principales */
     --color-text-muted: #E5E7EB;
-    /* Textos secundarios */
-
     --color-footer: #000000;
-    /* Fondo negro puro para Footer */
-
-    /* Efectos / Transiciones */
     --transition-fast: 0.3s ease;
 }
 
@@ -62,7 +46,6 @@ ul {
     list-style: none;
 }
 
-/* Contenedor central - límite estructural */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -79,42 +62,79 @@ ul {
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid #2A2A2A;
-    /* Borde inferior oscuro muy fino para separar */
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid; /* Usamos Grid para forzar un centrado matemático perfecto */
+    grid-template-columns: 1fr auto 1fr; /* Columna izquierda y derecha exactamente idénticas */
     align-items: center;
     height: 84px;
 }
 
-/* Logos y Tamaños */
+/* Forzamos al logo a pegarse a la izquierda */
+.header-container > :first-child {
+    justify-self: start;
+}
+
+/* Forzamos a las redes sociales a pegarse a la derecha */
+.header-container > :last-child {
+    justify-self: end;
+}
+
 .logo-img {
     height: 45px;
     width: auto;
     display: block;
 }
 
-/* Enlaces de Navegación */
+/* El menú queda encajado exactamente en el medio de la pantalla */
+.main-nav {
+    justify-self: center; 
+}
+
 .main-nav .nav-links {
     display: flex;
     gap: 40px;
+    align-items: center;
+}
+
+/* Ajuste específico para portátiles pequeños / tablets grandes */
+@media (max-width: 1024px) {
+    .main-nav .nav-links {
+        gap: 20px; 
+    }
 }
 
 .main-nav a {
     font-weight: 500;
     color: #FFFFFF;
-    /* Blanco para cabecera oscura */
     font-size: 1rem;
     transition: color var(--transition-fast);
+    white-space: nowrap; 
 }
 
 .main-nav a:hover {
     color: var(--color-accent);
-    /* Naranja Energético en hover */
 }
 
+/* Redes Sociales en Header (PC) */
+.header-socials {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    color: #ffffff; 
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--color-accent); 
+    transform: translateY(-2px); 
+}
 /* =========================================
    4. BOTONES / LLAMADA A LA ACCIÓN
    ========================================= */
@@ -123,7 +143,6 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 16px 36px;
-    /* Más espacio interno para el estándar robusto */
     border-radius: 8px;
     font-weight: 600;
     font-size: 1.05rem;
@@ -133,22 +152,17 @@ ul {
     border: 2px solid transparent;
 }
 
-/* Botón Destacado (Primary / Contacto) */
 .btn-primary {
     background-color: var(--color-accent);
-    /* Naranja Energético */
     color: #FFFFFF;
-    /* Texto forzado a blanco */
 }
 
 .btn-primary:hover {
     background-color: #E04D00;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(255, 90, 0, 0.15);
-    /* Relejo ligero naranja */
 }
 
-/* Botón Secundario (Transparente) */
 .btn-secondary {
     background-color: transparent;
     border-color: var(--color-text-main);
@@ -160,12 +174,16 @@ ul {
     transform: translateY(-2px);
 }
 
+.btn-glow {
+    min-width: 260px;
+    box-shadow: 0 0 20px rgba(255, 90, 0, 0.4);
+}
+
 /* =========================================
    5. HERO SECTION
    ========================================= */
 .hero {
     background-color: #0A0A0A;
-    /* Gradiente radial profundo en esquinas/bordes, centro negro/carbón */
     background-image: radial-gradient(circle at top left, rgba(0, 84, 203, 0.1) 0%, rgba(10, 10, 10, 0) 40%),
         radial-gradient(circle at bottom right, rgba(0, 84, 203, 0.1) 0%, rgba(10, 10, 10, 0) 40%);
     color: var(--color-text-main);
@@ -180,7 +198,6 @@ ul {
     overflow: hidden;
 }
 
-/* Canvas Dinámico */
 #hero-canvas {
     position: absolute;
     top: 0;
@@ -190,10 +207,8 @@ ul {
     z-index: 0;
     opacity: 0.4;
     pointer-events: auto;
-    /* Para capturar ratón */
 }
 
-/* Textura técnica sutil estilo grid-lineal opaco */
 .hero::after {
     content: '';
     position: absolute;
@@ -216,12 +231,10 @@ ul {
     gap: 32px;
     position: relative;
     z-index: 2;
-    /* Texto flota sobre el canvas */
 }
 
 .hero h1 {
     font-size: 4rem;
-    /* Más grande al ser corto */
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -1.5px;
@@ -234,22 +247,15 @@ ul {
     color: var(--color-text-muted);
     line-height: 1.6;
     margin: 0;
-    max-width: 800px; /* <--- Aumentado para que no se apelmace */
+    max-width: 800px;
 }
 
 .hero-buttons {
     display: flex;
     gap: 20px;
-    margin-top: 35px; /* <--- Aumentado para separarlo del párrafo */
+    margin-top: 35px;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-/* Efecto glow brillante para el botón */
-.btn-glow {
-    min-width: 260px;
-    /* Más ancho */
-    box-shadow: 0 0 20px rgba(255, 90, 0, 0.4);
 }
 
 /* =========================================
@@ -257,7 +263,6 @@ ul {
    ========================================= */
 .services-section {
     background-color: var(--color-bg-section);
-    /* Gris oscuro #1A1A1A */
     padding: 80px 0;
 }
 
@@ -288,13 +293,10 @@ ul {
 
 .service-card {
     background-color: var(--color-bg-card);
-    /* Gris carbón #2A2A2A */
     border-radius: 12px;
     padding: 40px 30px;
     border: 1px solid var(--color-border);
-    /* Borde sutil */
     border-bottom: 4px solid transparent;
-    /* Evita redimensionamientos en hover */
     transition: all var(--transition-fast);
     display: flex;
     flex-direction: column;
@@ -303,7 +305,6 @@ ul {
 .service-card h3 {
     font-size: 1.4rem;
     color: var(--color-text-main);
-    /* H3 blancos */
     margin-bottom: 16px;
 }
 
@@ -324,26 +325,22 @@ ul {
     margin-top: auto;
 }
 
-/* Efecto Elegante "Hover" oscuro */
 .service-card:hover {
     transform: translateY(-5px);
     border-color: var(--color-border);
     border-bottom: 4px solid var(--color-accent);
-    /* Acento inferior naranja */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    /* Reflejo muy oscuro hacia afuera */
 }
 
 .service-card:hover .service-link {
     color: var(--color-accent);
-    /* Mantiene link naranja */
 }
 
 /* =========================================
    6.5 DASHBOARD DE SOLUCIONES
    ========================================= */
 .dashboard-section {
-    padding: 100px 0; /* 100px arriba y 100px abajo para una simetría total */
+    padding: 100px 0;
     background-color: #0A0A0A;
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
@@ -353,7 +350,7 @@ ul {
 
 .dashboard-wrapper {
     max-width: 1000px;
-    margin: 40px auto 0 auto; /* 40px arriba para separar de los títulos, 0 abajo */
+    margin: 40px auto 0 auto;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -372,7 +369,6 @@ ul {
     color: var(--color-text-muted);
     padding: 14px 24px;
     font-family: 'Courier New', Courier, monospace;
-    /* Look Ingeniería Monospace */
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
@@ -417,22 +413,19 @@ ul {
     padding: 40px;
     box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.8);
     position: relative;
-    /* Quitamos el display: grid anterior que fallaba */
     display: block; 
 }
 
-/* Las pestañas ocultas flotan para NO ocupar espacio hacia abajo */
 .dash-content {
     opacity: 0;
     visibility: hidden;
     position: absolute; 
-    top: 40px; /* Mantiene el margen interior */
+    top: 40px; 
     left: 40px;
     right: 40px;
     transition: opacity 0.4s ease-in-out, visibility 0.4s;
 }
 
-/* Solo la pestaña activa vuelve a su sitio y empuja la caja lo justo y necesario */
 .dash-content.active {
     opacity: 1;
     visibility: visible;
@@ -484,7 +477,6 @@ ul {
    ========================================= */
 .method-section {
     background-color: var(--color-bg-global);
-    /* Negro oscuro global */
     padding: 80px 0;
 }
 
@@ -497,7 +489,6 @@ ul {
 
 .method-step {
     background-color: var(--color-bg-card);
-    /* Gris carbón */
     padding: 40px 30px;
     border-radius: 12px;
     border: 1px solid var(--color-border);
@@ -516,7 +507,6 @@ ul {
     font-size: 3.5rem;
     font-weight: 800;
     color: rgba(255, 90, 0, 0.1);
-    /* Tipografía sutil marca de agua */
     position: absolute;
     top: 10px;
     right: 20px;
@@ -546,7 +536,6 @@ ul {
    ========================================= */
 .trust-bar {
     background-color: #031535;
-    /* Azul oscuro comparado / Negro refinado */
     padding: 30px 0;
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
@@ -599,7 +588,7 @@ ul {
 }
 
 /* =========================================
-   8. SECCIÓN DE CONTACTO
+   9. SECCIÓN DE CONTACTO
    ========================================= */
 .contact-section {
     background-color: var(--color-bg-global);
@@ -647,6 +636,17 @@ ul {
     width: 28px;
     height: 28px;
     color: var(--color-accent);
+}
+
+/* Enlaces globales de contacto (Para que al pasar el ratón se iluminen) */
+.method a {
+    color: inherit; 
+    text-decoration: none; 
+    transition: color 0.3s ease;
+}
+
+.method a:hover {
+    color: var(--color-accent); 
 }
 
 .contact-form-wrapper {
@@ -712,190 +712,16 @@ ul {
 }
 
 /* =========================================
-   FOOTER
-========================================= */
-footer {
-    padding: 60px 0 40px 0;
-    background-color: #000000;
-    border-top: 1px solid #1a1a1a;
-    text-align: center; /* Centra todos los textos por defecto */
-}
-
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Fuerza a que todo (incluido el logo) vaya al centro */
-    gap: 20px;
-}
-
-.footer-logo {
-    height: 45px;
-    margin-bottom: 10px;
-}
-
-.footer-content p {
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-/* El bloque de enlaces ahora parece un menú cuidado */
-.footer-links {
-    display: flex;
-    gap: 20px;
-    margin-top: 15px;
-}
-
-.footer-links a {
-    color: #888;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border: 1px solid #333;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-/* Efecto al pasar el ratón: se ilumina en tu naranja */
-.footer-links a:hover {
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-    background-color: rgba(255, 102, 0, 0.05);
-}
-/* Adaptación Móvil */
-@media (max-width: 768px) {
-    .main-nav .nav-links {
-        display: none;
-    }
-
-    .hero h1 {
-        font-size: 2.8rem;
-    }
-
-    .hero p {
-        font-size: 1.1rem;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-        padding: 0 20px;
-    }
-
-    .btn-glow {
-        min-width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section-header h2 {
-        font-size: 2rem;
-    }
-
-    .contact-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .contact-info h2 {
-        font-size: 2rem;
-    }
-
-    .contact-form-wrapper {
-        padding: 30px;
-    }
-
-    .trust-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .method-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* =========================================
-   11. WHATSAPP FLOTANTE
-   ========================================= */
-.whatsapp-float {
-    position: fixed;
-    width: 64px;
-    height: 64px;
-    bottom: 25px;
-    right: 25px;
-    background-color: var(--color-accent);
-    color: #FFF;
-    border-radius: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: pulse-whatsapp 2s infinite;
-    transition: all 0.3s ease;
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    animation: none;
-    background-color: #FF6A1A;
-    box-shadow: 0 6px 20px rgba(255, 90, 0, 0.55);
-}
-
-.whatsapp-float svg {
-    width: 32px;
-    height: 32px;
-}
-
-@keyframes pulse-whatsapp {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 90, 0, 0.6);
-    }
-
-    70% {
-        box-shadow: 0 0 0 15px rgba(255, 90, 0, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 90, 0, 0);
-    }
-}
-
-/* =========================================
-   12. ANIMACIONES Y ESTADOS
-   ========================================= */
-.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
-}
-
-.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* =========================================
-   CAJÓN DESPLEGABLE SEO (VISUAL Y AVANZADO)
+   10. CAJÓN DESPLEGABLE SEO (FAQ)
 ========================================= */
 .seo-drawer-container {
     margin: 40px auto 60px auto;
-    max-width: 1100px; /* Un poco más ancho para respirar mejor */
+    max-width: 1100px;
     padding: 0 20px;
 }
 
 .seo-drawer {
-    background-color: #050505; /* Fondo más puro */
+    background-color: #050505; 
     border: 1px solid #1a1a1a;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -943,41 +769,38 @@ footer {
     padding: 40px 30px;
 }
 
-/* Espaciado general de la rejilla */
 .faq-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-    gap: 40px; /* Mucho más espacio entre columnas */
+    gap: 40px; 
 }
 
-/* Diseño de las Tarjetas (Más limpias, fondo más oscuro, bordes sutiles) */
 .faq-card {
-    background-color: #0a0a0a; /* Fondo casi negro puro */
-    border: 1px solid #1f1f1f; /* Borde gris muy suave */
-    border-radius: 12px; /* Esquinas más suaves */
-    padding: 30px 25px; /* Más aire por dentro (cero amontonado) */
-    margin-bottom: 25px; /* Más separación entre tarjeta y tarjeta */
+    background-color: #0a0a0a; 
+    border: 1px solid #1f1f1f; 
+    border-radius: 12px; 
+    padding: 30px 25px; 
+    margin-bottom: 25px; 
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .faq-card:hover {
     transform: translateY(-5px);
-    border-color: #ff6600; /* Se ilumina en naranja al pasar el ratón */
-    box-shadow: 0 10px 25px rgba(255, 102, 0, 0.08); /* Brillo sutil */
+    border-color: var(--color-accent); 
+    box-shadow: 0 10px 25px rgba(255, 102, 0, 0.08); 
 }
 
 .faq-card-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 15px; /* Más separación del título al texto */
+    margin-bottom: 15px; 
 }
 
-/* Iconos exclusivamente en naranja */
 .faq-icon-small {
     width: 24px;
     height: 24px;
-    color: #ff6600; 
+    color: var(--color-accent); 
     flex-shrink: 0;
 }
 
@@ -989,11 +812,10 @@ footer {
     line-height: 1.3;
 }
 
-/* Etiquetas (Badges) monocromáticas con toque naranja */
 .seo-badge {
     display: inline-block;
     background-color: rgba(255, 102, 0, 0.1); 
-    color: #ff6600; /* Texto naranja en lugar de azul */
+    color: var(--color-accent); 
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -1004,16 +826,13 @@ footer {
     border: 1px solid rgba(255, 102, 0, 0.2);
 }
 
-/* Texto de párrafo más suave a la vista */
 .faq-card p {
-    color: #999999; /* Gris más claro para que no pelee con el blanco */
+    color: #999999; 
     font-size: 0.9rem;
-    line-height: 1.7; /* Mayor interlineado para lectura fácil */
+    line-height: 1.7; 
     margin: 0;
 }
-/* =========================================
-   SISTEMA DE PESTAÑAS (FAQ DRAWER)
-========================================= */
+
 .faq-tabs-header {
     display: flex;
     justify-content: center;
@@ -1042,11 +861,10 @@ footer {
 }
 
 .faq-tab-btn.active {
-    color: var(--color-primary); /* Naranja */
+    color: var(--color-primary); 
     border-bottom: 2px solid var(--color-primary);
 }
 
-/* Ocultar y mostrar paneles con una animación suave */
 .faq-tab-pane {
     display: none;
     animation: fadeInTab 0.4s ease-in-out;
@@ -1062,35 +880,131 @@ footer {
 }
 
 /* =========================================
-   REVISIÓN MÓVIL 2.0 (OPTIMIZACIÓN TOTAL)
+   11. FOOTER
 ========================================= */
-/* Estilos globales para los enlaces de contacto */
-.method a {
-    color: inherit; /* Hereda el color blanco/gris del diseño */
-    text-decoration: none; /* Quita la raya de abajo */
-    transition: color 0.3s ease;
+footer {
+    padding: 60px 0 40px 0;
+    background-color: #000000;
+    border-top: 1px solid #1a1a1a;
+    text-align: center; 
 }
-.method a:hover {
-    color: #ff6600; /* Se vuelve naranja al pasar el ratón en PC */
-}
- /* =========================================
-   RESTAURACIÓN Y AJUSTES FINALES MÓVIL
-========================================= */
 
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 20px;
+}
+
+.footer-logo {
+    height: 45px;
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-color: rgba(255, 102, 0, 0.05);
+}
+
+/* =========================================
+   12. WHATSAPP FLOTANTE Y ANIMACIONES
+   ========================================= */
+.whatsapp-float {
+    position: fixed;
+    width: 64px;
+    height: 64px;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--color-accent);
+    color: #FFF;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse-whatsapp 2s infinite;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    animation: none;
+    background-color: #FF6A1A;
+    box-shadow: 0 6px 20px rgba(255, 90, 0, 0.55);
+}
+
+.whatsapp-float svg {
+    width: 32px;
+    height: 32px;
+}
+
+@keyframes pulse-whatsapp {
+    0% { box-shadow: 0 0 0 0 rgba(255, 90, 0, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 90, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 90, 0, 0); }
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   13. MEDIA QUERIES (VERSIÓN MÓVIL Y TABLET)
+   ========================================= */
 @media (max-width: 768px) {
-  @media (max-width: 768px) {
-    /* 1. HEADER: Logo izquierda, Redes derecha */
+    /* Header */
     .nav-container {
         padding: 15px 20px !important;
-        display: flex !important; /* Asegura que sea flex */
+        display: flex !important; 
         flex-direction: row !important;
-        justify-content: space-between !important; /* Esto separa los elementos */
+        justify-content: space-between !important; 
         align-items: center !important;
+    }
+    
+    .main-nav .nav-links,
+    .nav-container .btn, 
+    header .btn { 
+        display: none !important; 
     }
 
     .header-socials {
-        display: flex !important; /* ¡Esto hará que salgan en móvil! */
+        display: flex !important; /* Fuerza la visibilidad de los iconos */
         gap: 12px;
+        margin-left: 0;
     }
 
     .header-socials .social-icon svg {
@@ -1098,21 +1012,7 @@ footer {
         height: 18px;
     }
 
-    /* Ocultar botón si aún existe */
-    .nav-container .btn { display: none !important; }
-}
-
-/* Estilo para que los iconos se vean bien en PC */
-.social-icon {
-    display: flex;
-    align-items: center;
-    color: white;
-    transition: 0.3s;
-}
-.social-icon:hover {
-    color: #ff6600;
-}
-    /* 2. HERO: Mantenemos tu tamaño de 2.2rem con aire entre botones */
+    /* Hero */
     .hero h1 {
         font-size: 2.2rem !important; 
         line-height: 1.1;
@@ -1127,40 +1027,57 @@ footer {
         margin-bottom: 35px;
     }
 
+    .hero-buttons,
     .hero-btns {
         display: flex;
         flex-direction: row;
         justify-content: center;
         gap: 15px; 
         flex-wrap: wrap;
+        width: 100%;
+        padding: 0 20px;
     }
 
-    .header-socials {
-        display: none !important; /* Ocultos en móvil para mantener el minimalismo */
-    }
-
-    .hero-btns .btn {
+    .hero-buttons .btn,
+    .hero-btns .btn,
+    .btn-glow {
         flex: 1;
         min-width: 145px;
         padding: 15px 10px;
         font-size: 0.85rem;
         margin-bottom: 10px; 
+        width: 100%;
     }
 
-    /* 3. DASHBOARD: Ajuste de la "pantalla" para que el texto respire */
+    /* Servicios y Método */
+    .services-grid,
+    .method-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+   /* --- C. DASHBOARD --- */
     .dashboard-controls {
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        justify-content: center;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr; /* Fuerza 2 botones arriba */
         gap: 10px;
         padding: 0 10px 15px 10px;
+        width: 100%;
     }
 
     .dash-btn {
-        padding: 10px 15px !important;
+        padding: 12px 10px !important;
         font-size: 0.75rem !important;
-        white-space: nowrap;
+        justify-content: center; /* Centra el texto y el puntito */
+        text-align: center;
+    }
+
+    /* Hace que el 3º botón (Vivienda) ocupe todo el ancho debajo */
+    .dash-btn:nth-child(3) {
+        grid-column: 1 / -1; 
     }
 
     .dashboard-screen {
@@ -1177,19 +1094,75 @@ footer {
     .mono-text {
         font-size: 0.85rem !important;
     }
+    /* Trust Bar */
+    .trust-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-    /* 4. FAQ / CAJÓN SEO: Estilo horizontal del vídeo */
+    /* Contacto */
+    .contact-info {
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-info h2 {
+        font-size: 1.8rem !important;
+        text-align: center !important;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .contact-info p {
+        text-align: center !important;
+        padding: 0 15px !important;
+        line-height: 1.5;
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        flex-direction: column;
+    }
+
+    .contact-methods {
+        flex-direction: column; 
+        gap: 20px; 
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .method-icon {
+        width: 32px !important; 
+        height: 32px !important;
+    }
+
+    .method a {
+        font-size: 1.2rem !important; 
+    }
+
+    .contact-form-wrapper {
+        padding: 25px !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* FAQ */
     .seo-drawer-btn {
         font-size: 0.85rem !important;
         padding: 15px !important;
     }
 
     .faq-tabs-header {
-        display: flex;
         flex-direction: row;
-        justify-content: space-around;
         gap: 5px;
-        border-bottom: 1px solid #1f1f1f;
         margin-bottom: 20px;
     }
 
@@ -1197,9 +1170,6 @@ footer {
         font-size: 0.7rem !important;
         padding: 10px 5px !important;
         flex: 1;
-        text-align: center;
-        background: none;
-        border: none;
     }
 
     .faq-grid {
@@ -1215,61 +1185,7 @@ footer {
         font-size: 0.9rem !important;
     }
 
-
-   /* 5. CONTACTO: Centrado perfecto y absoluto */
-    .contact-info {
-        width: 100% !important;
-        margin: 0 auto !important;
-        padding: 0 !important; /* Eliminamos cualquier margen heredado del PC */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Fuerza el centrado total de todo el contenedor */
-    }
-
-    .contact-info h2 {
-        font-size: 1.8rem !important;
-        text-align: center !important;
-        margin-bottom: 15px;
-        width: 100%;
-    }
-
-    .contact-info p {
-        text-align: center !important;
-        padding: 0 15px !important; /* Espacio justo a los lados para que no toque la pantalla */
-        line-height: 1.5;
-        margin-bottom: 30px;
-        color: #ddd;
-        max-width: 100%;
-    }
-    .contact-container {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .contact-methods {
-        display: flex;
-        flex-direction: column; /* Apilamos el teléfono y el correo */
-        gap: 20px; /* Mucho espacio entre ambos para no pulsar mal */
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .method-icon {
-        width: 32px !important; /* Iconos más grandes */
-        height: 32px !important;
-        color: #ff6600; /* Le damos color naranja al icono para que parezca un botón */
-    }
-
-    .method a {
-        font-size: 1.2rem !important; /* Texto un 20% más grande */
-        font-weight: 500;
-    }
-
-    .contact-form-wrapper {
-        padding: 25px !important;
-    }
-
-    /* 6. FOOTER */
+    /* Footer */
     .footer-links {
         flex-direction: column;
         gap: 12px;
@@ -1278,57 +1194,14 @@ footer {
 
     .footer-links a {
         width: 100%;
-        text-align: center;
         padding: 8px;
     }
-}
 
-@media (max-width: 768px) {
+    /* WhatsApp Flotante */
     .whatsapp-float {
         bottom: 20px;
         right: 20px;
         width: 50px;
         height: 50px;
     }
-}
-/* Estilos para los iconos de redes sociales en el header */
-.header-socials {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin-left: 20px;
-}
-
-.social-icon {
-    color: #ffffff; /* Color blanco por defecto */
-    transition: all 0.3s ease;
-    opacity: 0.8;
-}
-
-.social-icon:hover {
-    color: #ff6600; /* Se vuelven naranjas al pasar el ratón */
-    transform: translateY(-2px); /* Pequeña animación de subida */
-    opacity: 1;
-}
-
-/* Estilos para los iconos de redes sociales en el header */
-.header-socials {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-left: 20px;
-}
-
-.social-icon {
-    color: #ffffff; 
-    transition: all 0.3s ease;
-    opacity: 0.85;
-    display: flex;
-    align-items: center;
-}
-
-.social-icon:hover {
-    color: #ff6600; 
-    transform: translateY(-2px); 
-    opacity: 1;
 }
