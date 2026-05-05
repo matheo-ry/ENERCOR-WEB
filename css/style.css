@@ -2,11 +2,9 @@
    1. VARIABLES DE ESTADO Y COLORES CORPORATIVOS
    ========================================= */
 :root {
-    /* Colores Corporativos */
-    --color-primary: #0054CB;
-    /* Azul Eléctrico - Queda como reserva secundaria */
+    /* Cambiamos el azul por un tono oscuro o el mismo naranja para unificar */
+    --color-primary: #FF5A00; /* Ahora el 'Primary' es tu Naranja Enercor */
     --color-accent: #FF5A00;
-    /* Naranja Energético - Único color principal y vibrante */
 
     /* Escala de Grises - Premium Dark Mode */
     --color-bg-global: #101010;
@@ -1061,4 +1059,268 @@ footer {
 @keyframes fadeInTab {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   REVISIÓN MÓVIL 2.0 (OPTIMIZACIÓN TOTAL)
+========================================= */
+/* Estilos globales para los enlaces de contacto */
+.method a {
+    color: inherit; /* Hereda el color blanco/gris del diseño */
+    text-decoration: none; /* Quita la raya de abajo */
+    transition: color 0.3s ease;
+}
+.method a:hover {
+    color: #ff6600; /* Se vuelve naranja al pasar el ratón en PC */
+}
+ /* =========================================
+   RESTAURACIÓN Y AJUSTES FINALES MÓVIL
+========================================= */
+
+@media (max-width: 768px) {
+   /* 1. HEADER: Logo a la izquierda y Redes a la derecha */
+    .nav-container {
+        padding: 15px 20px !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; /* Separa logo y redes a los extremos */
+        align-items: center;
+    }
+
+    /* Ocultamos el botón de la cabecera en móviles */
+    .nav-container .btn, 
+    header .btn {
+        display: none !important;
+    }
+
+    /* Ajustamos las redes sociales para que quepan bien en móvil */
+    .header-socials {
+        display: flex !important; /* Forzamos que se vean */
+        gap: 12px;
+        margin-left: 0;
+    }
+
+    .header-socials svg {
+        width: 18px !important; /* Un pelín más pequeños para no robar protagonismo al logo */
+        height: 18px !important;
+    }
+    /* 2. HERO: Mantenemos tu tamaño de 2.2rem con aire entre botones */
+    .hero h1 {
+        font-size: 2.2rem !important; 
+        line-height: 1.1;
+        margin-bottom: 25px;
+        letter-spacing: -1px;
+    }
+
+    .hero p {
+        font-size: 1rem !important;
+        padding: 0 10px;
+        line-height: 1.4;
+        margin-bottom: 35px;
+    }
+
+    .hero-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px; 
+        flex-wrap: wrap;
+    }
+
+    .header-socials {
+        display: none !important; /* Ocultos en móvil para mantener el minimalismo */
+    }
+
+    .hero-btns .btn {
+        flex: 1;
+        min-width: 145px;
+        padding: 15px 10px;
+        font-size: 0.85rem;
+        margin-bottom: 10px; 
+    }
+
+    /* 3. DASHBOARD: Ajuste de la "pantalla" para que el texto respire */
+    .dashboard-controls {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 10px 15px 10px;
+    }
+
+    .dash-btn {
+        padding: 10px 15px !important;
+        font-size: 0.75rem !important;
+        white-space: nowrap;
+    }
+
+    .dashboard-screen {
+        padding: 30px 20px !important; 
+        margin: 0 10px;
+        border-radius: 12px;
+    }
+
+    .dash-content h3 {
+        font-size: 1.4rem !important;
+        margin-bottom: 15px;
+    }
+
+    .mono-text {
+        font-size: 0.85rem !important;
+    }
+
+    /* 4. FAQ / CAJÓN SEO: Estilo horizontal del vídeo */
+    .seo-drawer-btn {
+        font-size: 0.85rem !important;
+        padding: 15px !important;
+    }
+
+    .faq-tabs-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 5px;
+        border-bottom: 1px solid #1f1f1f;
+        margin-bottom: 20px;
+    }
+
+    .faq-tab-btn {
+        font-size: 0.7rem !important;
+        padding: 10px 5px !important;
+        flex: 1;
+        text-align: center;
+        background: none;
+        border: none;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .faq-card {
+        padding: 20px !important;
+    }
+
+    .faq-card h5 {
+        font-size: 0.9rem !important;
+    }
+
+
+   /* 5. CONTACTO: Centrado perfecto y absoluto */
+    .contact-info {
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important; /* Eliminamos cualquier margen heredado del PC */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Fuerza el centrado total de todo el contenedor */
+    }
+
+    .contact-info h2 {
+        font-size: 1.8rem !important;
+        text-align: center !important;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .contact-info p {
+        text-align: center !important;
+        padding: 0 15px !important; /* Espacio justo a los lados para que no toque la pantalla */
+        line-height: 1.5;
+        margin-bottom: 30px;
+        color: #ddd;
+        max-width: 100%;
+    }
+    .contact-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .contact-methods {
+        display: flex;
+        flex-direction: column; /* Apilamos el teléfono y el correo */
+        gap: 20px; /* Mucho espacio entre ambos para no pulsar mal */
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .method-icon {
+        width: 32px !important; /* Iconos más grandes */
+        height: 32px !important;
+        color: #ff6600; /* Le damos color naranja al icono para que parezca un botón */
+    }
+
+    .method a {
+        font-size: 1.2rem !important; /* Texto un 20% más grande */
+        font-weight: 500;
+    }
+
+    .contact-form-wrapper {
+        padding: 25px !important;
+    }
+
+    /* 6. FOOTER */
+    .footer-links {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .footer-links a {
+        width: 100%;
+        text-align: center;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+}
+/* Estilos para los iconos de redes sociales en el header */
+.header-socials {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.social-icon {
+    color: #ffffff; /* Color blanco por defecto */
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.social-icon:hover {
+    color: #ff6600; /* Se vuelven naranjas al pasar el ratón */
+    transform: translateY(-2px); /* Pequeña animación de subida */
+    opacity: 1;
+}
+
+/* Estilos para los iconos de redes sociales en el header */
+.header-socials {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.social-icon {
+    color: #ffffff; 
+    transition: all 0.3s ease;
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+}
+
+.social-icon:hover {
+    color: #ff6600; 
+    transform: translateY(-2px); 
+    opacity: 1;
 }

@@ -231,3 +231,33 @@ faqTabBtns.forEach(btn => {
         }
     });
 });
+const contactForm = document.getElementById('contact-form');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        
+        // Cambiamos el texto del botón para dar feedback visual
+        const btn = contactForm.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = "Enviando...";
+        btn.disabled = true;
+
+        const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            alert('¡Recibido! Nos pondremos en contacto contigo lo antes posible.');
+            contactForm.reset();
+        } else {
+            alert('Ups, algo ha fallado. Por favor, inténtalo de nuevo o llámanos directamente.');
+        }
+        
+        btn.innerText = originalText;
+        btn.disabled = false;
+    });
+}
