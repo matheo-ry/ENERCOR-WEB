@@ -1078,32 +1078,40 @@ footer {
 ========================================= */
 
 @media (max-width: 768px) {
-   /* 1. HEADER: Logo a la izquierda y Redes a la derecha */
+  @media (max-width: 768px) {
+    /* 1. HEADER: Logo izquierda, Redes derecha */
     .nav-container {
         padding: 15px 20px !important;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between; /* Separa logo y redes a los extremos */
-        align-items: center;
+        display: flex !important; /* Asegura que sea flex */
+        flex-direction: row !important;
+        justify-content: space-between !important; /* Esto separa los elementos */
+        align-items: center !important;
     }
 
-    /* Ocultamos el botón de la cabecera en móviles */
-    .nav-container .btn, 
-    header .btn {
-        display: none !important;
-    }
-
-    /* Ajustamos las redes sociales para que quepan bien en móvil */
     .header-socials {
-        display: flex !important; /* Forzamos que se vean */
+        display: flex !important; /* ¡Esto hará que salgan en móvil! */
         gap: 12px;
-        margin-left: 0;
     }
 
-    .header-socials svg {
-        width: 18px !important; /* Un pelín más pequeños para no robar protagonismo al logo */
-        height: 18px !important;
+    .header-socials .social-icon svg {
+        width: 18px;
+        height: 18px;
     }
+
+    /* Ocultar botón si aún existe */
+    .nav-container .btn { display: none !important; }
+}
+
+/* Estilo para que los iconos se vean bien en PC */
+.social-icon {
+    display: flex;
+    align-items: center;
+    color: white;
+    transition: 0.3s;
+}
+.social-icon:hover {
+    color: #ff6600;
+}
     /* 2. HERO: Mantenemos tu tamaño de 2.2rem con aire entre botones */
     .hero h1 {
         font-size: 2.2rem !important; 
